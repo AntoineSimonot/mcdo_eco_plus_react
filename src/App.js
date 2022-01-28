@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
+import RequireAuth from './Components/RequireAuth';
+import LoginPageTerminal from './Pages/LoginPageTerminal';
+import LoginPageUser from './Pages/LoginPageUser';
+import Main from './Pages/Main';
+import NotFoundPage from './Pages/NotFoundPage';
+import { UserProvider } from './Providers/UserProvider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+        <UserProvider>
+          <Routes>
+              <Route path="/login_user" element={<LoginPageUser/>} > </Route>
+              <Route path="/login_terminal" element={<LoginPageTerminal/>} > </Route>
+
+              <Route path="/main" element={
+                    <RequireAuth><Main></Main></RequireAuth>
+                  } >
+              </Route>
+
+              <Route path="*" element={<NotFoundPage/>}></Route>
+          </Routes>
+        </UserProvider>
+  </BrowserRouter>
   );
 }
 
