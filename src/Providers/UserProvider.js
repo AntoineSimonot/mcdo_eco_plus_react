@@ -5,26 +5,21 @@ export const UserProvider = (props) => {
 
     const [user, setUser] = useState([]);
     const [connected, setConnected] = useState(false);
-    const [role, setRole] = useState("");
 
-    const setUserData = () => {
-        me().then((data) => {
-            setUser(data.data)
-            setConnected(true)
+    function setUserData() {
+        me().then((user) => {
+            setUser(user.data)
+            localStorage.setItem("role", user.data.role)
+            if (user.data.role !== "terminal") setConnected(true)
         })
     }
 
-
-    useEffect(() => {  
-    
-        if (getToken()) {
-            setUserData()
-        }
-
+    useEffect(() => {     
+        getToken() ? setUserData() : setUser({"role" : "guest"})
     }, [])
     
     return (
-        <UserContext.Provider value={{user, setUser, connected, setConnected, role, setRole}} >
+        <UserContext.Provider value={{user, setUser, connected, setConnected}} >
             {props.children}
         </UserContext.Provider>
     )

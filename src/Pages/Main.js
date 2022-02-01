@@ -1,14 +1,13 @@
-import React from "react";
-import { useContext } from "react/cjs/react.development";
+import React, { useContext } from "react";
+import Nav from "../Components/Nav";
 import { UserContext } from "../Providers/UserProvider";
 
 export default function Main() {
-  const { role } = useContext(UserContext)
-
+  const { user } = useContext(UserContext)
   return (
     <div>
-      <p>{role }</p>
-      <h1>Main</h1>
+      <p>{user.role}</p>
+      <Nav></Nav>
     </div>
   )
 }

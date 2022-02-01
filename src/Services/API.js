@@ -1,7 +1,10 @@
 let baseUrl = 'http://127.0.0.1:3000'
 
 export const getToken = () => {
-    return localStorage.getItem('token')
+    if (localStorage.getItem('token')) return localStorage.getItem('token')
+    if (localStorage.getItem('terminalToken')) return localStorage.getItem('terminalToken')
+
+    return null
 }
 
 export const loginUser = async ({ email, password }) => {
@@ -55,3 +58,38 @@ export const me = async () => {
     return json
     
 }
+
+export const getProducts = async () => {
+    
+    let response = await fetch(`${baseUrl}/products`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        }
+    })
+
+    let json = await response.json()
+
+    return json
+    
+}
+
+export const postOrder = async (products, price) => {
+    let response = await fetch(`${baseUrl}/orders`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({
+            price: price,
+            products: products,
+        })
+    })
+
+    let json = await response.json()
+
+    return json
+}
+

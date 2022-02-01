@@ -1,12 +1,12 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react/cjs/react.development";
 import LoginPageUserForm from "../Components/Forms/LoginPageUserForm";
 import { UserContext } from "../Providers/UserProvider";
 
 
 export default function LoginPageUser() {
+    const { setUser } = useContext(UserContext)
     let navigate = useNavigate();
-    const { setRole } = useContext(UserContext)
 
     return (
         <div>
@@ -14,10 +14,11 @@ export default function LoginPageUser() {
             <LoginPageUserForm/>
             <button onClick={
                 () => {
-                   
-                    setRole("guest")
+                    localStorage.setItem('role', "guest")
+                    setUser({
+                        "role" : "guest"
+                    })
                     navigate("/main");
-                 
                 }
             }>Continuer sans s'identifier</button>
         </div>

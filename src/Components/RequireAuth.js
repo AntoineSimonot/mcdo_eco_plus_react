@@ -4,37 +4,32 @@ import { useContext } from "react/cjs/react.development";
 import { UserContext } from "../Providers/UserProvider";
 
 function RequireAuth({ children }) {
-    const { user } = useContext(UserContext);
-    const { role } = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     let navigate = useNavigate();
 
+    
     useEffect (() => {
 
-        console.log(user)
-        if (role === "guest") {
-            console.log("user", user)
-            navigate("/main");
-        }
-
-        if (role === "user") {
-            console.log("user", user)
-            navigate("/main");
-        }
-
-        if (role === "terminal") {
-            console.log("user", user)
-            navigate("/main");
-        }
-
-        // if user is empty array 
-        if (user.length === 0) {
-            navigate("/login_terminal");
+        switch (localStorage.getItem("role")) {
+            case "terminal":
+                return children;
+            case "user":
+                return children;
+            case "guest":
+                return children;
+            case "kitchen":
+                navigate("/kitchen");
+                break;
+            case "admin":
+                navigate("/admin");
+                break;
+            default :
+                navigate("/login_terminal");
         }
      
-        
-    }, [navigate])
-
+    }, [navigate, user])
+    
     return children;
 
 }

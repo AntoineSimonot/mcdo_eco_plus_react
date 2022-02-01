@@ -7,9 +7,8 @@ import { loginUser, me } from "../../Services/API";
 export default function LoginPageUserForm() {
    
 
-    const { user, setUser } = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
     const { setConnected } = useContext(UserContext)
-    const { setRole } = useContext(UserContext)
     const { register, handleSubmit, formState: { errors } } = useForm();
     let navigate = useNavigate();
 
@@ -17,24 +16,23 @@ export default function LoginPageUserForm() {
         <form onSubmit={handleSubmit(async (form) => {
                 
             let response = await loginUser(form)
-
             if (response.status === 200) {
                 localStorage.setItem('token', response.data)
                 let userData = await me()
                 setConnected(true)
                 setUser(userData.data)
 
-                if (user.role === "user") {
-                    setRole("user")
-                    navigate("/main")
-                }
-                if (user.role === "kitchen") {
-                    setRole("kitchen")
-                    setRole("/kitchen")
-                }
-                if (user.role === "admin") {
-                    setRole("admin")
-                    setRole("/admin")
+                localStorage.setItem('role', userData.data.role)
+
+                switch (userData.data.role) {
+                    case "kitchen":
+                        navigate("/kitchen");
+                        break;
+                    case "admin":
+                        navigate("/admin");
+                        break;
+                    default :
+                        navigate("/main");
                 }
             }
             else{
