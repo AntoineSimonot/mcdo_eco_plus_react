@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ProductContext } from "../Providers/ProductsProvider";
+import '../Style/ShoppingCartStyle.css';
 
 function ShoppingCart({ product }) {
 

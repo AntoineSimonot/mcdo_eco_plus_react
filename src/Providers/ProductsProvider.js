@@ -5,11 +5,12 @@ export const ProductsProvider = (props) => {
 
     const [products, setProducts] = useState([]);
     const [shoppingCart, setShoppingCart] = useState([]);
-
     useEffect(() => {     
+        
         getProducts().then((products) => {
             setProducts(products.data)
         })
+
     }, [])
     
     return (

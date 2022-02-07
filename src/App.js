@@ -3,7 +3,6 @@ import RequireAuth from './Components/RequireAuth';
 import CustomProductPage from './Pages/CustomProductPage';
 import LoginPageTerminal from './Pages/LoginPageTerminal';
 import LoginPageUser from './Pages/LoginPageUser';
-import Main from './Pages/Main';
 import NotFoundPage from './Pages/NotFoundPage';
 import Products from './Pages/ProductsPage';
 import { IngredientProvider } from './Providers/IngredientProvider';
@@ -21,10 +20,6 @@ function App() {
 
                   <Route path="/login_user" element={
                         <RequireAuth><LoginPageUser></LoginPageUser></RequireAuth>
-                      } >
-                  </Route>
-                  <Route path="/main" element={
-                        <RequireAuth><Main></Main></RequireAuth>
                       } >
                   </Route>
                   <Route path="/products" element={

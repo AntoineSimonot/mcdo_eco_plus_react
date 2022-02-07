@@ -32,7 +32,7 @@ export default function LoginPageUserForm() {
                         navigate("/admin");
                         break;
                     default :
-                        navigate("/main");
+                        navigate("/products");
                 }
             }
             else{

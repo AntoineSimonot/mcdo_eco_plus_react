@@ -93,3 +93,55 @@ export const postOrder = async (products, price) => {
     return json
 }
 
+export const getIngredients = async () => {
+    
+    let response = await fetch(`${baseUrl}/ingredients`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        }
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+export const postProduct = async (name, ingredients, price) => {
+    let response = await fetch(`${baseUrl}/products`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({
+            name: name,
+            ingredients: ingredients,
+            price: price,
+            custom: true
+        })
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+// put ingredient
+export const putIngredient = async (quantity, id) => {
+    let response = await fetch(`${baseUrl}/ingredients/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({
+            quantity: quantity,
+        })
+    })
+
+    let json = await response.json()
+
+    return json
+}
