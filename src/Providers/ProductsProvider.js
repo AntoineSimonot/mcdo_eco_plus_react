@@ -5,6 +5,7 @@ export const ProductsProvider = (props) => {
 
     const [products, setProducts] = useState([]);
     const [shoppingCart, setShoppingCart] = useState([]);
+    const [shoppingCartTotal, setShoppingCartTotal] = useState([]);
     useEffect(() => {     
         
         getProducts().then((products) => {
@@ -14,7 +15,7 @@ export const ProductsProvider = (props) => {
     }, [])
     
     return (
-        <ProductContext.Provider value={{products, getProducts, shoppingCart, setShoppingCart}} >
+        <ProductContext.Provider value={{products, setProducts, getProducts, shoppingCart, setShoppingCart, shoppingCartTotal, setShoppingCartTotal}} >
             {props.children}
         </ProductContext.Provider>
     )

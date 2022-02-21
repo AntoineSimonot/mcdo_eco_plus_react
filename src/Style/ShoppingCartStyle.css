@@ -1,18 +1,8 @@
 .productInfoContainer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    width: 70%;
-    height: 50%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border: 1px solid white;
-    overflow: auto;
-    background-color: white;
-
+    width: 100%;
 }
 
 img{
     width: 150px;
 }
+

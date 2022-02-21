@@ -6,6 +6,9 @@ import Nav from "../Components/Nav";
 import { IngredientContext } from "../Providers/IngredientProvider";
 import { ProductContext } from "../Providers/ProductsProvider";
 import { postProduct } from "../Services/API";
+import '../Style/CustomProductPage.css';
+import ShoppingCart from "../Components/ShoppingCart";
+import ValidateOrderButton from "../Components/ValidateOrderButton";
 
 export default function CustomProductPage() {
   const { ingredients } = useContext(IngredientContext)
@@ -13,7 +16,7 @@ export default function CustomProductPage() {
   const { shoppingCart, setShoppingCart } = useContext(ProductContext)
 
   return (
-    <div>
+    <div className="customProductPage">
       <Nav></Nav>
       <div>
         <p>Custom product</p>
@@ -27,16 +30,30 @@ export default function CustomProductPage() {
      <SelectedIngredients productIngredient={productIngredient} setProductIngredient={setProductIngredient}/>
 
        <button onClick={async ()=> {
-      
-          const ingredients_ids = productIngredient.map(data => data.id)
-          
-          const totalPrice = productIngredient.reduce((acc, data) => {
-            return acc + data.price
-          }, 0)
-
-          let product = await postProduct("custom", ingredients_ids, totalPrice)
-          setShoppingCart([...shoppingCart, product.data])
+          if (productIngredient.length > 0) {
+            let product = {
+              name: "Custom product",
+              price: productIngredient.reduce((acc, curr) => acc + curr.price, 0),
+              file: {
+                location: require("../Img/Burger.png")
+              },
+              pti: productIngredient.map(data => data.id)
+            }
+            
+            let created_product = await postProduct(product)
+            
+            setShoppingCart([...shoppingCart, {
+              data: created_product.data,
+              excludedIngredients: [],
+            }])
+          }     
        }}>Create Product</button>
+
+      <div className="shoppingCart">
+            <ShoppingCart></ShoppingCart>
+          
+            <ValidateOrderButton shoppingCart={shoppingCart}></ValidateOrderButton>
+      </div>
     </div>
   )
 }

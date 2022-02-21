@@ -18,7 +18,7 @@ export default function LoginPageUser() {
                     setUser({
                         "role" : "guest"
                     })
-                    navigate("/main");
+                    navigate("/products");
                 }
             }>Continuer sans s'identifier</button>
         </div>

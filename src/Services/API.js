@@ -93,6 +93,7 @@ export const postOrder = async (products, price) => {
     return json
 }
 
+
 export const getIngredients = async () => {
     
     let response = await fetch(`${baseUrl}/ingredients`, {
@@ -108,7 +109,7 @@ export const getIngredients = async () => {
     return json
 }
 
-export const postProduct = async (name, ingredients, price) => {
+export const postProduct = async ({name, pti, price}) => {
     let response = await fetch(`${baseUrl}/products`, {
         method: 'POST',
         headers: {
@@ -117,7 +118,7 @@ export const postProduct = async (name, ingredients, price) => {
         },
         body: JSON.stringify({
             name: name,
-            ingredients: ingredients,
+            ingredients: pti,
             price: price,
             custom: true
         })
@@ -138,6 +139,69 @@ export const putIngredient = async (quantity, id) => {
         },
         body: JSON.stringify({
             quantity: quantity,
+        })
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+// get one ingredient
+export const getIngredient = async (id) => {
+    let response = await fetch(`${baseUrl}/ingredients/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        }
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+
+// get orders
+export const getOrders = async () => {
+    let response = await fetch(`${baseUrl}/orders`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        }
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+// delete orders
+export const deleteOrder = async (id) => {
+    let response = await fetch(`${baseUrl}/orders/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        }
+    })
+
+    let json = await response.json()
+
+    return json
+}
+// put order status
+export const putOrderStatus = async (id, status) => {
+    let response = await fetch(`${baseUrl}/orders/${id}/status`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({
+            status: status,
         })
     })
 

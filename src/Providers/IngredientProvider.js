@@ -13,7 +13,7 @@ export const IngredientProvider = (props) => {
     }, [])
 
     return (
-        <IngredientContext.Provider value={{excludedIngredients, setExcludedIngredients, ingredients, setIngredients}} >
+        <IngredientContext.Provider value={{setIngredients, excludedIngredients, setExcludedIngredients, ingredients, setIngredients}} >
             {props.children}
         </IngredientContext.Provider>
     )

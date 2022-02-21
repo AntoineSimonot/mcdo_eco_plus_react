@@ -1,32 +1,33 @@
 import { useContext } from "react/cjs/react.development";
-import { IngredientContext } from "../Providers/IngredientProvider";
 import { postOrder, putIngredient } from "../Services/API";
+import { ProductContext } from "../Providers/ProductsProvider";
+import { useNavigate } from "react-router-dom";
 
-function ValidateOrderButton({ shoppingCart }) {
-
-  const { excludedIngredients } = useContext(IngredientContext)
+function ValidateOrderButton( ) {
+  const { shoppingCart } = useContext(ProductContext)
+  let navigate = useNavigate();
 
     return (
-        <button onClick={() => {
+        <button onClick={async () => {
             let products = shoppingCart.map(product => ({
-              id: product.id,
-              excluded_ingredients : excludedIngredients.filter(excludedIngredient => excludedIngredient.product_id === product.id).map(excludedIngredient => excludedIngredient.ingredient_id)
+              id: product.data.id,
+              excluded_ingredients : product.excludedIngredients.map(excludedIngredient => excludedIngredient.ingredient.id)
             }))
             
-           // get ingredients
-            let ingredients = shoppingCart.reduce((acc, data) => {
-              return acc.concat(data.pti.map(data => data.ingredient))
+            let ingredients = shoppingCart.reduce((acc, product) => {
+              return acc.concat(product.data.pti.map(data => data.ingredient))
             }, [])
             
+            
             ingredients.forEach(ingredient => {
-              putIngredient(ingredient.quantity - 1, ingredient.id)
+              putIngredient(parseInt(ingredient.quantity) -1, ingredient.id)
             });
 
-            postOrder(products, shoppingCart.reduce((acc, curr) => acc + curr.price, 0))
+            let order = await postOrder(products, shoppingCart.reduce((acc, curr) => acc + curr.data.price, 0))
+            navigate("/order", { state: { order: order.data} })
           }}>Send</button>
     )
 
 }
 
 export default ValidateOrderButton;
-  
