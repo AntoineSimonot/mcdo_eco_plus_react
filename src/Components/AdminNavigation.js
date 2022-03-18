@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { UserContext } from "../Providers/UserProvider";
 import '../Style/NavStyle.css';
 import '../Img/McdoLogo.png';
-function Nav() {
+function AdminNavigation() {
 
     const { setUser, connected, setConnected} = useContext(UserContext)
    
@@ -16,15 +16,18 @@ function Nav() {
             <ul>
                 <h1>Navigation</h1>
                 <li>
-                    <NavLink to={ "/products"}>Products</NavLink>
+                    <NavLink to={ "/admin/ingredients"}>Ingredients</NavLink>
                 </li>
                 <li>
-                    <NavLink to={ "/custom-product"}>Custom Product</NavLink>
+                    <NavLink to={ "/admin/products"}>Products</NavLink>
+                </li>
+                <li>
+                    <NavLink to={ "/admin/stats"}>Stats</NavLink>
+                </li>
+                <li>
+                    <NavLink to={ "/admin/orders"}>Orders</NavLink>
                 </li>
                 
-                { connected === false && <li> <NavLink to={ "/login_user"} >Login</NavLink></li>}
-                
-               
                 { connected === true &&  <li> <NavLink to={ "/login_user"} onClick={ ()=> {
                     localStorage.setItem('role', "guest")
                     localStorage.removeItem('token')
@@ -32,7 +35,10 @@ function Nav() {
                         "role" : "guest"
                     })                
                     setConnected(false)
-                }}>Logout</NavLink> </li>}
+                }}>Logout</NavLink> </li>}                
+               
+     
+
                 
             </ul>
      
@@ -46,5 +52,5 @@ function Nav() {
 
 }
 
-export default Nav;
+export default AdminNavigation;
   

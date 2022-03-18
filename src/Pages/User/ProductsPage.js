@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import Nav from "../Components/Nav";
-import { ProductContext } from "../Providers/ProductsProvider";
-import Product from "../Components/Product";
-import ShoppingCart from "../Components/ShoppingCart";
-import ValidateOrderButton from "../Components/ValidateOrderButton";
-import '../Style/ProductsPageStyle.css';
+import Nav from "../../Components/Nav";
+import { ProductContext } from "../../Providers/ProductsProvider";
+import Product from "../../Components/Product";
+import ShoppingCart from "../../Components/ShoppingCart";
+import ValidateOrderButton from "../../Components/ValidateOrderButton";
+import '../../Style/ProductsPageStyle.css';
 
-export default function Products() {
+export default function ProductsPage() {
   
   const { products ,shoppingCart } = useContext(ProductContext)
 
@@ -16,7 +16,7 @@ export default function Products() {
 
       <div className="container">
         <div className="topPart">
-          <h1>Hello</h1>
+          <h1>Products</h1>
         </div>
         <div className="bottomPart">
           <div className="productList">
@@ -28,10 +28,12 @@ export default function Products() {
       </div>
       
 
-  <div className="shoppingCart">
-      <ShoppingCart></ShoppingCart>
-     
+  <div className="shoppingCartContainer">
+      <ShoppingCart>
+        
+      </ShoppingCart>
       <ValidateOrderButton shoppingCart={shoppingCart}></ValidateOrderButton>
+
   </div>
       
     </div>

@@ -75,6 +75,23 @@ export const getProducts = async () => {
     
 }
 
+// get product
+export const getProduct = async (id) => {
+        
+        let response = await fetch(`${baseUrl}/products/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
+    
+        let json = await response.json()
+    
+        return json
+        
+}
+
 export const postOrder = async (products, price) => {
     let response = await fetch(`${baseUrl}/orders`, {
         method: 'POST',
@@ -109,7 +126,7 @@ export const getIngredients = async () => {
     return json
 }
 
-export const postProduct = async ({name, pti, price}) => {
+export const postProduct = async ({name, pti, price, custom}) => {
     let response = await fetch(`${baseUrl}/products`, {
         method: 'POST',
         headers: {
@@ -120,7 +137,7 @@ export const postProduct = async ({name, pti, price}) => {
             name: name,
             ingredients: pti,
             price: price,
-            custom: true
+            custom: custom
         })
     })
 
@@ -130,7 +147,7 @@ export const postProduct = async ({name, pti, price}) => {
 }
 
 // put ingredient
-export const putIngredient = async (quantity, id) => {
+export const changeIngredientQuantity = async (quantity, id) => {
     let response = await fetch(`${baseUrl}/ingredients/${id}`, {
         method: 'PUT',
         headers: {
@@ -209,3 +226,109 @@ export const putOrderStatus = async (id, status) => {
 
     return json
 }
+
+// post ingredient 
+export const postIngredient = async ({name, quantity, price}) => {
+    let response = await fetch(`${baseUrl}/ingredients`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({
+            name: name,
+            quantity: quantity,
+            price: price,
+        })
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+// post file
+export const postImage = async (file) => {
+    let formData = new FormData()
+    formData.append('image', file, file.name)
+
+    let response = await fetch(`${baseUrl}/files`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${getToken()}`
+        },
+        body: formData
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+// put ingredient
+export const putIngredient = async (id, data) => {
+    let response = await fetch(`${baseUrl}/ingredients/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify(
+            {...data}
+        )
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+// delete ingredient
+export const deleteIngredient = async (id) => {
+    let response = await fetch(`${baseUrl}/ingredients/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        }
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+// delete product
+export const deleteProduct = async (id) => {
+    let response = await fetch(`${baseUrl}/products/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        }
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+// put product
+export const putProduct = async (id, data) => {
+    let response = await fetch(`${baseUrl}/products/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify(
+            {...data}
+        )
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+

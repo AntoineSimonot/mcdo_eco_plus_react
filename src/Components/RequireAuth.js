@@ -10,20 +10,28 @@ function RequireAuth({ children }) {
 
     
     useEffect (() => {
-
-        switch (localStorage.getItem("role")) {
+        switch (localStorage.getItem("role") || user.role) {
             case "terminal":
-                return children;
+                return navigate("/login_user");
             case "user":
-                return children;
+                if (window.location.pathname.match(/admin/g) === null && window.location.pathname.match(/kitchen/g) === null) {
+                    return children;
+
+                }
+                return navigate("/login_user");
             case "guest":
-                return children;
+                if (window.location.pathname.match(/admin/g) === null && window.location.pathname.match(/kitchen/g) === null) {
+                    return children;
+                }
+                return navigate("/login_user");
             case "kitchen":
-                navigate("/kitchen");
-                break;
+                if (window.location.pathname === "/kitchen") {
+                    return children;
+                }
+                console.log("oui")
+                return navigate("/login_user");
             case "admin":
-                navigate("/admin");
-                break;
+                return children;
             default :
                 navigate("/login_terminal");
         }

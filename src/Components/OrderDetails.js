@@ -1,4 +1,17 @@
+import { useContext, useEffect } from "react";
+import { onSocketSetOrder } from "../Services/OrderHelper";
+import OrderDetailsIngredients from "./OrderDetailsIngredients"
+import { OrderContext } from "../Providers/OrderProvider";
+
 export default function OrderDetails({order}) {
+  const { orders, setOrders } = useContext(OrderContext);
+
+  useEffect(() => {
+    console.log("test")
+    if (window.location.pathname === "/kitchen") {
+      onSocketSetOrder(orders, setOrders);
+    }
+  }, [orders]);
 
   return (
     <div className="orderDetails" key={order.orderId}>
@@ -10,15 +23,12 @@ export default function OrderDetails({order}) {
         return (
           <div className="product" key={opt.orderToProductId}>
             <h3>{opt.product.name}</h3>
-            
             <h4>Ingredients</h4> 
-             {opt.product.pti.map((ingredient) => {
+            {opt.product.pti.map((ingredient) => {
               return (
-                <div className="ingredient" key={ingredient.ingredient.id}>
-                  <h5>{ingredient.ingredient.name}</h5>
-                </div>
-              );
-            })} 
+                <OrderDetailsIngredients product={opt} ingredient={ingredient}></OrderDetailsIngredients>
+              )
+            })}
           </div>
         )
       }

@@ -1,6 +1,5 @@
 .customProductPage{
     display: flex;
-    align-items: center;
     justify-content: space-between;
     height: 100%;
 }
@@ -8,3 +7,40 @@
 img{
     width: 150px;
 }
+
+.selectedIngredients {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    
+}
+.selectedIngredients .ingredient{
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.selectedIngredients .ingredient button{
+    margin-right: 10px;
+    height: 20px;
+    background-color: rgb(228, 65, 65);
+    border: none;
+    color: white;
+}
+
+.customProductPage .createProductButton{
+    width: 30%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: #3c863f;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+}
+

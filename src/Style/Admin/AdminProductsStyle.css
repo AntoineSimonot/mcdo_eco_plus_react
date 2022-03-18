@@ -1,0 +1,84 @@
+.AdminProductsPageContainer{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.AdminProductsPageContainer > button{
+    width: 30%;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #3c863f;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.AdminProductsPageContainer > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.AdminProductsPageContainer > div > .product {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    flex-direction: column;
+    width: 275px;
+    height: 150px;
+    justify-content: center;
+    margin: 15px;
+}
+
+.AdminProductsPageContainer > div > .product > div:nth-of-type(1){
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.AdminProductsPageContainer > div > .product > div:nth-of-type(1) img{
+    width: 37.5%;
+
+}
+
+.AdminProductsPageContainer > div > .product > div:nth-of-type(1) h1{
+    font-family: 'Arial', sans-serif;
+    color: #404040;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.AdminProductsPageContainer > div > .product > div:nth-of-type(1) h2{
+    font-family: 'Arial', sans-serif;
+    color: #404040;
+    font-size: 16px;
+    margin: 0;
+}
+.AdminProductsPageContainer > div > .product button {
+    border-radius: 5px;
+    background-color: #3c863f;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    padding: 7.5px 20px;
+    margin: 7.5px;
+}

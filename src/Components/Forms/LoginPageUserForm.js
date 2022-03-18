@@ -29,7 +29,7 @@ export default function LoginPageUserForm() {
                         navigate("/kitchen");
                         break;
                     case "admin":
-                        navigate("/admin");
+                        navigate("/admin/ingredients");
                         break;
                     default :
                         navigate("/products");

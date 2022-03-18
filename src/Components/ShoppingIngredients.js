@@ -1,9 +1,7 @@
-import { useContext, useState, useEffect } from "react";
-import { ProductContext } from "../Providers/ProductsProvider";
+import { useState } from "react";
 import ShoppingIngredientButton from "./ShoppingIngredientButton";
 
 function ShoppingIngredients({pti, product} ) {
-  const { shoppingCart, setShoppingCart  } = useContext(ProductContext)
 
   const [showIngredient, setShowIngredient] = useState(false);
 
@@ -19,7 +17,7 @@ function ShoppingIngredients({pti, product} ) {
             <div>
                 {pti.map((product_data, index) => {
                   return(
-                    <ShoppingIngredientButton key={index} product_data={product_data} product={product} />
+                    <ShoppingIngredientButton key={index} product_data={product_data} product={product} shoppingIndex={index}/>
                   )}
                 )}
             </div>

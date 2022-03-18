@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import OrderDetails from "../Components/OrderDetails";
+import OrderDetails from "../../Components/OrderDetails";
 
 export default function OrderPage() {
   const {state} = useLocation();
@@ -9,6 +9,8 @@ export default function OrderPage() {
   return (
     <div className="order" key={order.orderId}>
       <OrderDetails order={order} />
+      <a href="/products">repasser une commande</a>
     </div>
+
   )
 }

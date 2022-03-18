@@ -17,7 +17,7 @@ function ProductInfo({product, excludedIngredients, setExcludedIngredients}) {
         }
     }
     return (
-        <div className="productInfoContainer">
+        <div className="productInfoModal">
             <div className="productInfo" key={product.id}>
 
                 <div className="productInfoTitle">

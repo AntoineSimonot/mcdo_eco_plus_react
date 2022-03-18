@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginPageUserForm from "../Components/Forms/LoginPageUserForm";
-import { UserContext } from "../Providers/UserProvider";
+import LoginPageUserForm from "../../Components/Forms/LoginPageUserForm";
+import { UserContext } from "../../Providers/UserProvider";
 
 
 export default function LoginPageUser() {

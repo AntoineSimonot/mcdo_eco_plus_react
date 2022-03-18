@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { loginTerminal } from '../Services/API'
+import { loginTerminal } from '../../Services/API'
 import { useContext } from 'react';
-import { UserContext } from "../Providers/UserProvider";
+import { UserContext } from "../../Providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPageTerminal() {
@@ -19,10 +19,11 @@ export default function LoginPageTerminal() {
 
             if (response.status === 200) {
                 localStorage.setItem('token', response.data)
-              
+                console.log("test")
                 setUser({
                     "role" : "guest"
                 })
+                
                
                 navigate("/login_user")
             }
